@@ -8,7 +8,7 @@ import io.realm.Realm
 /**
  * Created by 09ae9c on 18-11-18.
  */
-class RealmWrapper(val realm: Realm) : IDbHandler {
+class DbRealmHandler(val realm: Realm) : IDbHandler {
 
     companion object {
         private const val cannotCastError =
@@ -47,6 +47,6 @@ class RealmWrapper(val realm: Realm) : IDbHandler {
 
     @Suppress("UNCHECKED_CAST")
     override fun <C : IModel> query(cls: Class<C>): IQuery {
-        return RealmQueryWrapper(this, cls as Class<IRealmModel>)
+        return DbRealmQuery(this, cls as Class<IRealmModel>)
     }
 }

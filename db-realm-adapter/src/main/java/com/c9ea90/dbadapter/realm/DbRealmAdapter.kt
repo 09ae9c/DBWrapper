@@ -25,6 +25,6 @@ class DbRealmAdapter private constructor() : IDbAdapter {
         val config = RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
             .build()
-        return RealmWrapper(Realm.getInstance(config))
+        return DbRealmHandler(Realm.getInstance(config))
     }
 }

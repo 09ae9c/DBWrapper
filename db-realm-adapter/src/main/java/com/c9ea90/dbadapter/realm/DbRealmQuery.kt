@@ -9,8 +9,8 @@ import io.realm.kotlin.deleteFromRealm
 /**
  * Created by 09ae9c on 18-11-18.
  */
-class RealmQueryWrapper(private val realmWrapper: RealmWrapper, cls: Class<IRealmModel>) : IQuery {
-    private val query = realmWrapper.realm.where(cls)
+class DbRealmQuery(private val realmHandler: DbRealmHandler, cls: Class<IRealmModel>) : IQuery {
+    private val query = realmHandler.realm.where(cls)
 
     override fun equalsTo(key: String, value: String): IQuery {
         query.equalTo(key, value)
@@ -92,14 +92,14 @@ class RealmQueryWrapper(private val realmWrapper: RealmWrapper, cls: Class<IReal
     }
 
     override fun deleteFirst(): Boolean {
-        realmWrapper.realm.safeExecTransaction {
+        realmHandler.realm.safeExecTransaction {
             query.findFirst()?.deleteFromRealm()
         }
         return true
     }
 
     override fun deleteAll(): Boolean {
-        realmWrapper.realm.safeExecTransaction {
+        realmHandler.realm.safeExecTransaction {
             query.findAll()?.deleteAllFromRealm()
         }
         return true
