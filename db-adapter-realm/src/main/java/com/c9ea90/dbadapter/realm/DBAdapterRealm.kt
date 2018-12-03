@@ -30,9 +30,10 @@ class DBAdapterRealm private constructor() : IAdapter {
         return RealmWrapper(Realm.getInstance(config))
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <E : IModel> getDBQuery(handler: IDBHandler, cls: Class<E>): IQuery {
         if (handler is RealmWrapper) {
-            return RealmQueryWrapper(handler, cls)
+            return RealmQueryWrapper(handler, cls as Class<IRealmModel>)
         } else {
             throw RuntimeException("you must provider a RealmWrapper")
         }
