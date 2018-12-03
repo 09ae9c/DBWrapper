@@ -9,11 +9,11 @@ import io.realm.RealmConfiguration
 /**
  * Created by 09ae9c on 18-11-18.
  */
-class DBAdapterRealm private constructor() : IAdapter {
+class DbRealmAdapter private constructor() : IAdapter {
 
     companion object {
-        fun create(): DBAdapterRealm {
-            return DBAdapterRealm()
+        fun create(): DbRealmAdapter {
+            return DbRealmAdapter()
         }
     }
 

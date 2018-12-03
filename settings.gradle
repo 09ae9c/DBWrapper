@@ -1,1 +1,1 @@
-include ':app', ':db-wrapper', ':db-adapter-realm'
+include ':app', ':db-wrapper', ':db-realm-adapter'

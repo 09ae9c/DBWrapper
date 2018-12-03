@@ -1,7 +1,7 @@
 package com.c9ea90.dbwrapper
 
 import android.app.Application
-import com.c9ea90.dbadapter.realm.DBAdapterRealm
+import com.c9ea90.dbadapter.realm.DbRealmAdapter
 
 /**
  * Created by 09ae9c on 18-11-18.
@@ -13,7 +13,7 @@ class BaseApp : Application() {
 
         DBWrapper.initialize(
             DBWrapperConfig.Builder(this)
-                .adapter(DBAdapterRealm.create())
+                .adapter(DbRealmAdapter.create())
                 .build()
         )
     }
