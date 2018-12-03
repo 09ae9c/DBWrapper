@@ -5,24 +5,24 @@ import android.util.Log
 /**
  * Created by 09ae9c on 18-11-18.
  */
-class DBWrapper private constructor(config: DBWrapperConfig) {
+class DbWrapper private constructor(config: DbWrapperConfig) {
 
     companion object {
 
-        private const val TAG = "DBWrapper"
+        private const val TAG = "DbWrapper"
 
         @Volatile
-        var INSTANCE: DBWrapper? = null
+        var INSTANCE: DbWrapper? = null
 
-        fun initialize(config: DBWrapperConfig) {
+        fun initialize(config: DbWrapperConfig) {
             if (INSTANCE != null) {
-                Log.d(TAG, "DBWrapper have already been init")
+                Log.d(TAG, "DbWrapper have already been init")
             } else {
-                INSTANCE = DBWrapper(config)
+                INSTANCE = DbWrapper(config)
             }
         }
 
-        fun get(): DBWrapper {
+        fun get(): DbWrapper {
             return INSTANCE ?: throw RuntimeException("you must call initialize() before get()")
         }
     }
@@ -34,10 +34,10 @@ class DBWrapper private constructor(config: DBWrapperConfig) {
 
         adapter.initialize(appCtx)
 
-        Log.d(TAG, "DBWrapper init done!")
+        Log.d(TAG, "DbWrapper init done!")
     }
 
-    fun getDBHandler(): IDBHandler {
-        return adapter.getDBHandler()
+    fun getDBHandler(): IDbHandler {
+        return adapter.getDbHandler()
     }
 }

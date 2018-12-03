@@ -11,8 +11,8 @@ class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        DBWrapper.initialize(
-            DBWrapperConfig.Builder(this)
+        DbWrapper.initialize(
+            DbWrapperConfig.Builder(this)
                 .adapter(DbRealmAdapter.create())
                 .build()
         )

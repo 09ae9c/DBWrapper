@@ -5,9 +5,9 @@ import android.content.Context
 /**
  * Created by 09ae9c on 18-11-18.
  */
-interface IAdapter {
+interface IDbAdapter {
 
     fun initialize(context: Context)
 
-    fun getDBHandler(): IDBHandler
+    fun getDbHandler(): IDbHandler
 }

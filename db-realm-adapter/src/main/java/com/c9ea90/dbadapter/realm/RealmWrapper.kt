@@ -1,6 +1,6 @@
 package com.c9ea90.dbadapter.realm
 
-import com.c9ea90.dbwrapper.IDBHandler
+import com.c9ea90.dbwrapper.IDbHandler
 import com.c9ea90.dbwrapper.IModel
 import com.c9ea90.dbwrapper.IQuery
 import io.realm.Realm
@@ -8,7 +8,7 @@ import io.realm.Realm
 /**
  * Created by 09ae9c on 18-11-18.
  */
-class RealmWrapper(val realm: Realm) : IDBHandler {
+class RealmWrapper(val realm: Realm) : IDbHandler {
 
     companion object {
         private const val cannotCastError =

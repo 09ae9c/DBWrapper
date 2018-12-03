@@ -9,12 +9,12 @@ import com.c9ea90.dbwrapper.model.User
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var dbHandler: IDBHandler
+    private lateinit var dbHandler: IDbHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        dbHandler = DBWrapper.get().getDBHandler()
+        dbHandler = DbWrapper.get().getDBHandler()
     }
 
     fun onCreateUser(view: View) {
