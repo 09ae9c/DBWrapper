@@ -4,14 +4,11 @@ import com.c9ea90.dbwrapper.IDBHandler
 import com.c9ea90.dbwrapper.IModel
 import com.c9ea90.dbwrapper.IQuery
 import io.realm.Realm
-import io.realm.RealmModel
-import io.realm.RealmQuery
 
 /**
  * Created by 09ae9c on 18-11-18.
  */
 class RealmWrapper(val realm: Realm) : IDBHandler {
-
 
     companion object {
         private const val cannotCastError =
@@ -20,7 +17,7 @@ class RealmWrapper(val realm: Realm) : IDBHandler {
 
     override fun create(model: IModel) {
         if (model is IRealmModel) {
-            realm.executeTransaction { it.copyToRealm(model) }
+            realm.safeExecTransaction { it.copyToRealm(model) }
         } else {
             throw RuntimeException(cannotCastError)
         }
@@ -30,12 +27,12 @@ class RealmWrapper(val realm: Realm) : IDBHandler {
     override fun createAll(models: List<IModel>) {
         val realmModels = models as? List<IRealmModel>
             ?: throw RuntimeException(cannotCastError)
-        realm.executeTransaction { it.copyToRealm(realmModels) }
+        realm.safeExecTransaction { it.copyToRealm(realmModels) }
     }
 
     override fun update(model: IModel) {
         if (model is IRealmModel) {
-            realm.executeTransaction { it.copyToRealmOrUpdate(model) }
+            realm.safeExecTransaction { it.copyToRealmOrUpdate(model) }
         } else {
             throw RuntimeException(cannotCastError)
         }
@@ -45,15 +42,11 @@ class RealmWrapper(val realm: Realm) : IDBHandler {
     override fun updateAll(models: List<IModel>) {
         val realmModels = models as? List<IRealmModel>
             ?: throw RuntimeException(cannotCastError)
-        realm.executeTransaction { it.copyToRealmOrUpdate(realmModels) }
+        realm.safeExecTransaction { it.copyToRealmOrUpdate(realmModels) }
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun <C : IModel> query(cls: Class<C>): IQuery {
         return RealmQueryWrapper(this, cls as Class<IRealmModel>)
-    }
-
-    private fun checkType(model: IModel) {
-        if (model !is IRealmModel) throw RuntimeException(cannotCastError)
     }
 }

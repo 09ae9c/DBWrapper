@@ -92,14 +92,14 @@ class RealmQueryWrapper(private val realmWrapper: RealmWrapper, cls: Class<IReal
     }
 
     override fun deleteFirst(): Boolean {
-        realmWrapper.realm.executeTransaction {
+        realmWrapper.realm.safeExecTransaction {
             query.findFirst()?.deleteFromRealm()
         }
         return true
     }
 
     override fun deleteAll(): Boolean {
-        realmWrapper.realm.executeTransaction {
+        realmWrapper.realm.safeExecTransaction {
             query.findAll()?.deleteAllFromRealm()
         }
         return true
