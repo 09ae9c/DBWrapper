@@ -11,4 +11,6 @@ open class User : IRealmModel {
     var id: String? = null
     var name: String? = null
     var type: String? = null
+
+    var createdTs: Long = 0
 }
