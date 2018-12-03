@@ -35,4 +35,11 @@
             android:textAllCaps="false"
             android:text="query user with condition"/>
 
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDeleteFirstFromQueryAllUsers"
+            android:textAllCaps="false"
+            android:text="delete first from query all users"/>
+
+
 </LinearLayout>

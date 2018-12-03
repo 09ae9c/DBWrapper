@@ -32,7 +32,6 @@ class DBWrapper private constructor(config: DBWrapperConfig) {
     init {
         val appCtx = config.context.applicationContext
 
-
         adapter.initialize(appCtx)
 
         Log.d(TAG, "DBWrapper init done!")
@@ -40,9 +39,5 @@ class DBWrapper private constructor(config: DBWrapperConfig) {
 
     fun getDBHandler(): IDBHandler {
         return adapter.getDBHandler()
-    }
-
-    fun <E : IModel> getDBQuery(handler: IDBHandler, cls: Class<E>): IQuery {
-        return adapter.getDBQuery(handler, cls)
     }
 }

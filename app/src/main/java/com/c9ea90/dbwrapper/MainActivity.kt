@@ -1,11 +1,10 @@
 package com.c9ea90.dbwrapper
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.c9ea90.dbadapter.realm.RealmQueryWrapper
 import com.c9ea90.dbwrapper.model.User
 
 class MainActivity : AppCompatActivity() {
@@ -38,32 +37,35 @@ class MainActivity : AppCompatActivity() {
                 createdTs = System.currentTimeMillis()
             })
         }
-        dbHandler.create(list)
+        dbHandler.createAll(list)
     }
 
     fun onQueryUserById(view: View) {
-        val query = DBWrapper.get().getDBQuery(dbHandler, User::class.java)
-
-        val user = query.equalsTo("id", "001")
+        val user = dbHandler.query(User::class.java).equalsTo("id", "001")
             .findFirst()
 
         toastAndLog("find user: $user")
     }
 
     fun onQueryUserListByType(view: View) {
-        val result = DBWrapper.get().getDBQuery(dbHandler, User::class.java)
-            .findALl()
+        val result = dbHandler.query(User::class.java)
+            .findAll()
 
         toastAndLog("find users: $result")
     }
 
     fun onQueryUserWithCondition(view: View) {
-        val result = DBWrapper.get().getDBQuery(dbHandler, User::class.java)
+        val result = dbHandler.query(User::class.java)
             .equalsTo("type", "robot")
             .sort("createdTs", SortOrder.DESCENDING)
-            .findALl()
+            .findAll()
 
         toastAndLog("find users: $result")
+    }
+
+    fun onDeleteFirstFromQueryAllUsers(view: View) {
+        dbHandler.query(User::class.java)
+            .deleteAll()
     }
 
     private fun toastAndLog(content: String) {

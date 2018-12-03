@@ -26,6 +26,9 @@ interface IQuery {
     fun sort(key: String, sort: SortOrder): IQuery
 
     fun findFirst(): IModel?
+    fun findAll(): List<IModel>
 
-    fun findALl(): List<IModel>
+    fun deleteFirst(): Boolean
+    fun deleteAll(): Boolean
+
 }

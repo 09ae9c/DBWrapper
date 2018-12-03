@@ -4,11 +4,12 @@ import com.c9ea90.dbwrapper.IModel
 import com.c9ea90.dbwrapper.IQuery
 import com.c9ea90.dbwrapper.SortOrder
 import io.realm.Sort
+import io.realm.kotlin.deleteFromRealm
 
 /**
  * Created by 09ae9c on 18-11-18.
  */
-class RealmQueryWrapper(realmWrapper: RealmWrapper, cls: Class<IRealmModel>) : IQuery {
+class RealmQueryWrapper(private val realmWrapper: RealmWrapper, cls: Class<IRealmModel>) : IQuery {
     private val query = realmWrapper.realm.where(cls)
 
     override fun equalsTo(key: String, value: String): IQuery {
@@ -86,7 +87,21 @@ class RealmQueryWrapper(realmWrapper: RealmWrapper, cls: Class<IRealmModel>) : I
         return query.findFirst()
     }
 
-    override fun findALl(): List<IModel> {
+    override fun findAll(): List<IModel> {
         return query.findAll()
+    }
+
+    override fun deleteFirst(): Boolean {
+        realmWrapper.realm.executeTransaction {
+            query.findFirst()?.deleteFromRealm()
+        }
+        return true
+    }
+
+    override fun deleteAll(): Boolean {
+        realmWrapper.realm.executeTransaction {
+            query.findAll()?.deleteAllFromRealm()
+        }
+        return true
     }
 }

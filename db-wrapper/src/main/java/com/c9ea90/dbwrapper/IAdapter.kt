@@ -10,6 +10,4 @@ interface IAdapter {
     fun initialize(context: Context)
 
     fun getDBHandler(): IDBHandler
-
-    fun <E : IModel> getDBQuery(handler: IDBHandler, cls: Class<E>): IQuery
 }

@@ -5,11 +5,11 @@ package com.c9ea90.dbwrapper
  */
 interface IDBHandler {
 
-    fun create(model:IModel)
-    fun create(models:List<IModel>)
+    fun create(model: IModel)
+    fun createAll(models: List<IModel>)
 
-    fun update(model:IModel)
-    fun update(models:List<IModel>)
+    fun update(model: IModel)
+    fun updateAll(models: List<IModel>)
 
-    fun query(query:IQuery)
+    fun <C : IModel> query(cls: Class<C>): IQuery
 }
